@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Network Traffic Simulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .node-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .node {
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      width: 150px;
+      margin: 0 15px;
+      padding: 20px;
+    }
+    .chart {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Network Traffic Simulator</h1>
+  
+  <div class="node-container">
+    <div class="node" id="node1">
+      <h4>Node 1</h4>
+      <p id="node1-packets">Packets Generated: 0</p>
+      <p id="node1-load">Link Load: 0</p>
+      <p id="node1-queue">Packets in Queue: 0</p>
+    </div>
+    
+    <div class="node" id="node2">
+      <h4>Node 2</h4>
+      <p id="node2-packets">Packets Generated: 0</p>
+      <p id="node2-load">Link Load: 0</p>
+      <p id="node2-queue">Packets in Queue: 0</p>
+    </div>
+    
+    <div class="node" id="node3">
+      <h4>Node 3</h4>
+      <p id="node3-packets">Packets Generated: 0</p>
+      <p id="node3-load">Link Load: 0</p>
+      <p id="node3-queue">Packets in Queue: 0</p>
+    </div>
+  </div>
+
+
+  <script>
+    // Function to generate random stats
+    function generateRandomStats() {
+      return {
+        packetsGenerated: Math.floor(Math.random() * 100),
+        linkLoad: Math.floor(Math.random() * 50),
+        packetsInQueue: Math.floor(Math.random() * 20)
+      };
+    }
+
+    // Function to update node stats
+    function updateNodeStats(nodeId, stats) {
+      document.getElementById(`${nodeId}-packets`).innerText = `Packets Generated: ${stats.packetsGenerated}`;
+      document.getElementById(`${nodeId}-load`).innerText = `Link Load: ${stats.linkLoad}`;
+      document.getElementById(`${nodeId}-queue`).innerText = `Packets in Queue: ${stats.packetsInQueue}`;
+    }
+
+    // Function to update all nodes in real-time
+    function updateNodes() {
+      const node1Stats = generateRandomStats();
+      const node2Stats = generateRandomStats();
+      const node3Stats = generateRandomStats();
+
+      updateNodeStats('node1', node1Stats);
+      updateNodeStats('node2', node2Stats);
+      updateNodeStats('node3', node3Stats);
+    }
+
+    // Update the nodes every second
+    setInterval(updateNodes, 1000);
+  </script>
+
+</body>
+</html>
